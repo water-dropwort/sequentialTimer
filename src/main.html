@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sequential Timer</title>
+  </head>
+  <body>
+    <div>
+      <label for="times">Timer Config</label>
+      <input type="text" id="times" size="100"/>
+    </div>
+    <div>
+      <button type="button" id="btnStart">START</button>
+      <button type="button" id="btnStop">STOP</button>
+    </div>
+    <div>
+      <table border="1">
+        <thead>
+          <tr>
+            <th><min>progress</min></th><th><min>time</min></th>
+          </tr>
+          <tbody id="seqTable">
+          </tbody>
+      </table>
+    </div>
+    <script src="seqtimer.js"></script>
+    <script src="parser.js"></script>
+    <script src="main.js"></script>
+  </body>
+
+</html>
