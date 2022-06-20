@@ -37,13 +37,19 @@ function createSequenceTable(times)
     for(i = 0; i < times.length; ++i)
     {
         const row = document.createElement("tr");
-        const col1 = document.createElement("td");
-        col1.innerHTML = "   ";
-        const col2 = document.createElement("td");
-        col2.innerHTML = times[i];
-        col2.align = "right";
-        row.appendChild(col1);
-        row.appendChild(col2);
+        const col_no = document.createElement("td");
+        col_no.innerHTML = i;
+        col_no.id = "col_no";
+        const col_progress = document.createElement("td");
+        col_progress.innerHTML = "   ";
+        col_progress.id = "col_progress";
+        const col_time = document.createElement("td");
+        col_time.innerHTML = times[i];
+        col_time.id = "col_time";
+        col_time.align = "right";
+        row.appendChild(col_no);
+        row.appendChild(col_progress);
+        row.appendChild(col_time);
         tbody.appendChild(row);
     }
 }
@@ -59,12 +65,12 @@ function setProgress(index)
     {
         // 完了
         if(i < index)
-            tbody.children[i].children[0].style.backgroundColor = "lightgreen";
+            tbody.children[i].children["col_progress"].style.backgroundColor = "lightgreen";
         // 実行中
         else if (i == index)
-            tbody.children[i].children[0].style.backgroundColor = "pink";
+            tbody.children[i].children["col_progress"].style.backgroundColor = "pink";
         else
-            tbody.children[i].children[0].style.backgroundColor = null;
+            tbody.children[i].children["col_progress"].style.backgroundColor = null;
     }
 }
 
