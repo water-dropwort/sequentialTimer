@@ -6,6 +6,40 @@ function setEnable(isRunning)
     document.getElementById("times").disabled = isRunning;
 }
 
+// 1hour,1min,1secをmsec単位で。
+const oneSecMsec = 1000;
+const oneMinMsec = 60 * oneSecMsec;
+const oneHourMsec = 60 * oneMinMsec;
+
+// 0埋め2桁
+function zeroPadding(str)
+{
+    return ("00"+str).slice(-2);
+}
+
+// msecの値を、hh:mm:ss形式の文字列で返す。
+function msec2timeformat(msec)
+{
+    const hour = Math.floor(msec / oneHourMsec);
+    const remH = msec % oneHourMsec;
+    const min = Math.floor(remH / oneMinMsec);
+    const remM = remH % oneMinMsec;
+    const sec = Math.floor(remM / oneSecMsec);
+    return zeroPadding(hour) + ":" + zeroPadding(min) + ":" + zeroPadding(sec);
+}
+
+// 画面に表示している時間をクリアする。
+function resetTimeValue()
+{
+    document.getElementById("timeValue").innerHTML = msec2timeformat(0);
+}
+
+// msec単位の値を受けとり、hh:mm:ss形式に変換して、画面に表示する。
+function elapsed1secHandler(msec)
+{
+    document.getElementById("timeValue").innerHTML = msec2timeformat(msec);
+}
+
 // 所定の時間が経過したときに実行されるコールバック。
 function elapsedHandler(eventargs)
 {
@@ -81,7 +115,8 @@ function initialize() {
     Notification.requestPermission();
     // コントロールのEnabled/Disabled変更
     setEnable(false);
-
+    // 時間表示リセット
+    resetTimeValue();
     // STARTボタンクリック時の処理追加
     document.getElementById("btnStart").onclick = function()
     {
@@ -101,8 +136,9 @@ function initialize() {
 
             // タイマー実行
             seqTimer = new SeqTimer(times.map(e => e[1]));
-            seqTimer.startTimer(elapsedHandler);
+            seqTimer.startTimer(elapsed1secHandler, elapsedHandler);
             setEnable(true);
+            resetTimeValue();
         }
         catch(e)
         {
@@ -122,4 +158,14 @@ function initialize() {
     };
 };
 
-initialize();
+try
+{
+    // for jest
+    module.exports = {
+        "zeroPadding": zeroPadding,
+        "msec2timeformat": msec2timeformat
+    };
+}
+catch(e)
+{
+}
