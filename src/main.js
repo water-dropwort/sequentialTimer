@@ -43,9 +43,13 @@ function elapsed1secHandler(msec)
 // 所定の時間が経過したときに実行されるコールバック。
 function elapsedHandler(eventargs)
 {
+    // 通知ウィンドウに表示するアイコンのパス。
+    const imgpath = eventargs.isCompleted? "../image/complete.png" : "../image/continue.png";
+
     // Notification
     const options = {
-        body: "Elapsed Seq No." + eventargs.elapsedSeqIndex
+        body: "Elapsed Seq No." + eventargs.elapsedSeqIndex,
+        icon: imgpath
     };
     const ntf = new Notification("SequentialTimer",options);
 
