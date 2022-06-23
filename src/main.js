@@ -112,8 +112,16 @@ function setProgress(index)
     }
 }
 
+// MEMOに文字をセットする。
+function setMemo()
+{
+    // よく使用する設定などをべた書きで書いておく
+    document.getElementById("memo").value = "25min > 5min > 25min > 5min > 25min > 5min > 25min > 15min;";
+}
+
 // 初期化処理
-function initialize() {
+function initialize()
+{
     let seqTimer;
     // 通知許可
     Notification.requestPermission();
@@ -121,6 +129,8 @@ function initialize() {
     setEnable(false);
     // 時間表示リセット
     resetTimeValue();
+    // memoに初期値をセット
+    setMemo();
     // STARTボタンクリック時の処理追加
     document.getElementById("btnStart").onclick = function()
     {

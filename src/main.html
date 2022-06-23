@@ -2,18 +2,29 @@
 <html>
   <head>
     <title>Sequential Timer</title>
+    <style>
+      .block {margin-top:12px; margin-left:12px;}
+      .sLabel {display: block; float:left; width:112px;}
+      .textbox {width:640px; font-size:16px; font-family:"Meiryo UI"}
+      .timelabel {font-size:120px; color: green;}
+      .button {height:40px; width: 80px;}
+    </style>
   </head>
   <body>
-    <div>
-      <label for="times">Timer Config</label>
-      <input type="text" id="times" size="100"/>
+    <div class="block">
+      <label for="times" class="sLabel">Timer Config</label>
+      <input type="text" id="times" class="textbox"/>
     </div>
-    <div>
-      <button type="button" id="btnStart">START</button>
-      <button type="button" id="btnStop">STOP</button>
+    <div class="block">
+      <label for="memo" class="sLabel">Memo</label>
+      <textarea id="memo" class="textbox"></textarea>
     </div>
-    <div id="timeValue" style="font-size:120px; color: green;">20:00</div>
-    <div>
+    <div class="block">
+      <button type="button" id="btnStart" class="button">START</button>
+      <button type="button" id="btnStop" class="button">STOP</button>
+    </div>
+    <div id="timeValue" class="timelabel">20:00</div>
+    <div class="block">
       <table border="1">
         <thead>
           <tr>
